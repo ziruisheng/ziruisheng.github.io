@@ -421,7 +421,7 @@
 
         .pub-header {
             padding: 5rem 4rem 0;
-            max-width: 1300px; margin: 0 auto;
+            max-width: 1380px; margin: 0 auto;
             display: flex; justify-content: space-between;
             align-items: flex-end;
             border-bottom: 1.5px solid var(--p-deep);
@@ -445,7 +445,7 @@
         }
 
         .pub-list {
-            max-width: 1300px; margin: 0 auto;
+            max-width: 1380px; margin: 0 auto;
             padding: 0 4rem 5rem;
         }
 
@@ -463,7 +463,7 @@
 
         .pub-item {
             display: grid;
-            grid-template-columns: 160px 1fr auto;
+            grid-template-columns: 220px 1fr auto;
             gap: 1.8rem;
             padding: 1.8rem 0;
             border-bottom: 1px solid rgba(176,189,208,0.35);
@@ -475,8 +475,8 @@
             border-bottom-color: var(--p-accent);
         }
         .pub-item__thumb {
-            width: 160px;
-            height: 110px;
+            width: 220px;
+            height: 140px;
             background: var(--p-bg-alt);
             border: 1px solid var(--p-line);
             overflow: hidden;
@@ -485,20 +485,9 @@
         }
         .pub-item__thumb img {
             width: 100%; height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            object-position: center;
             display: block;
-        }
-        .pub-item__thumb-placeholder {
-            position: absolute; inset: 0;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            color: var(--p-line);
-            font-size: 0.6rem; font-weight: 500;
-            letter-spacing: 0.12em; text-transform: uppercase;
-        }
-        .pub-item__thumb-placeholder svg {
-            width: 28px; height: 28px;
-            stroke: var(--p-line); margin-bottom: 0.4rem;
         }
         .pub-item__title {
             font-family: var(--font-display);
@@ -678,7 +667,7 @@
             .home-research__grid { grid-template-columns: 1fr; }
             .pub-header, .pub-list { padding-left: 1.5rem; padding-right: 1.5rem; }
             .pub-item { grid-template-columns: 1fr; gap: 0.8rem; }
-            .pub-item__thumb { width: 100%; height: 140px; }
+            .pub-item__thumb { width: 100%; height: 190px; }
             .contact-wrapper { padding: 2rem 1.5rem; }
             .contact-grid { grid-template-columns: 1fr; }
         }
@@ -811,10 +800,6 @@
                     <article class="pub-item reveal">
                         <div class="pub-item__thumb">
                             <img src="papers/chen2026_toc.png">
-                            <div class="pub-item__thumb-placeholder">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                                TOC Image
-                            </div>
                         </div>
                         <div class="pub-item__content">
                             <h3 class="pub-item__title">Quantum-Classical Hybrid Computation of Electron Transfer in a Cryptochrome Protein via VQE-PDFT and Multiscale Modeling</h3>
@@ -835,10 +820,6 @@
                     <article class="pub-item reveal">
                         <div class="pub-item__thumb">
                             <img src="papers/sheng2025_toc.jpg">
-                            <div class="pub-item__thumb-placeholder">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                                TOC Image
-                            </div>
                         </div>
                         <div class="pub-item__content">
                             <h3 class="pub-item__title">Quantum Computer Simulation of Molecules in Optical Cavity</h3>
@@ -855,10 +836,6 @@
                     <article class="pub-item reveal reveal-d1">
                         <div class="pub-item__thumb">
                             <img src="papers/yang2025_toc.png">
-                            <div class="pub-item__thumb-placeholder">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                                TOC Image
-                            </div>
                         </div>
                         <div class="pub-item__content">
                             <h3 class="pub-item__title">Hierarchical Equations of Motion in Matrix Product States: Formalism and Applications for Charge Transport</h3>
@@ -875,10 +852,6 @@
                     <article class="pub-item reveal reveal-d2">
                         <div class="pub-item__thumb">
                             <img src="papers/jiang2025_toc.png">
-                            <div class="pub-item__thumb-placeholder">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                                TOC Image
-                            </div>
                         </div>
                         <div class="pub-item__content">
                             <h3 class="pub-item__title">Measurement-Efficient ADAPT-VQE with the SOAP Parameter Optimizer</h3>
@@ -899,10 +872,6 @@
                     <article class="pub-item reveal">
                         <div class="pub-item__thumb">
                             <img src="papers/sheng2024_toc.jpg">
-                            <div class="pub-item__thumb-placeholder">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                                TOC Image
-                            </div>
                         </div>
                         <div class="pub-item__content">
                             <h3 class="pub-item__title">TD-DMRG Study of Exciton Dynamics with Both Thermal and Static Disorders for Fenna-Matthews-Olson Complex</h3>
