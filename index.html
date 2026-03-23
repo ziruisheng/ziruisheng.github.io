@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zirui Sheng — Quantum Physics Researcher</title>
+    <title>Zirui Sheng</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -243,13 +243,39 @@
             margin-bottom: 1.5rem;
         }
 
+        .home-hero__headline {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .home-hero__avatar {
+            width: 102px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 2px solid rgba(184, 136, 43, 0.28);
+            background: var(--h-bg-alt);
+            box-shadow: 0 16px 38px rgba(30, 30, 28, 0.14);
+        }
+        .home-hero__avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 50% 20%;
+            transform: scale(1);
+            display: block;
+        }
+
         .home-hero__name {
             font-family: var(--font-display);
             font-size: clamp(3rem, 5.5vw, 5rem);
             font-weight: 300;
             line-height: 1.08;
             color: var(--h-text);
-            margin-bottom: 1.5rem;
+            margin-bottom: 0;
         }
         .home-hero__name em {
             font-style: italic;
@@ -269,78 +295,57 @@
         }
         .home-hero__bio a:hover { opacity: 0.7; }
 
-        /* Photo on the right side */
         .home-hero__right {
             position: relative;
             z-index: 2;
             display: flex;
-            justify-content: center;
+            justify-content: flex-end;
+            align-items: center;
         }
 
-        .home-hero__photo {
-            width: 340px;
-            height: 440px;
-            background: var(--h-bg-alt);
-            border: 1px solid var(--h-line);
-            position: relative;
-            overflow: hidden;
+        .home-hero__meta {
+            width: min(100%, 420px);
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.9rem;
+            padding: 1.35rem;
+            background: linear-gradient(180deg, rgba(250, 246, 240, 0.08), rgba(250, 246, 240, 0.03));
+            border: 1px solid rgba(250, 246, 240, 0.18);
+            box-shadow: 0 24px 60px rgba(15, 22, 12, 0.28);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
         }
-        .home-hero__photo img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            display: block;
+        .home-hero__meta-item {
+            padding: 1rem 1.1rem;
+            border: 1px solid rgba(250, 246, 240, 0.14);
+            background: rgba(250, 246, 240, 0.03);
         }
-        .home-hero__photo-placeholder {
-            position: absolute; inset: 0;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            color: var(--h-text-sub); font-size: 0.78rem;
-            letter-spacing: 0.1em; text-transform: uppercase;
-        }
-        .home-hero__photo-placeholder svg {
-            width: 40px; height: 40px; stroke: var(--h-line);
-            margin-bottom: 0.8rem;
-        }
-        .home-hero__photo-tag {
-            position: absolute;
-            bottom: 0; left: 0;
-            background: var(--h-accent);
-            color: #fff;
+        .home-hero__meta-label {
             font-size: 0.65rem; font-weight: 500;
             letter-spacing: 0.22em; text-transform: uppercase;
-            padding: 0.65rem 1.2rem;
+            color: rgba(250, 246, 240, 0.72);
+            margin-bottom: 0.4rem;
         }
-
-        /* --- Details bar --- */
-        .home-details {
-            display: flex;
-            border-top: 1px solid var(--h-line);
-            border-bottom: 1px solid var(--h-line);
-            margin: 0 4rem;
-        }
-        .home-details__item {
-            flex: 1;
-            padding: 1.6rem 2rem;
-            border-right: 1px solid var(--h-line);
-        }
-        .home-details__item:last-child { border-right: none; }
-        .home-details__label {
-            font-size: 0.65rem; font-weight: 500;
-            letter-spacing: 0.22em; text-transform: uppercase;
-            color: var(--h-text-sub);
-            margin-bottom: 0.3rem;
-        }
-        .home-details__value {
+        .home-hero__meta-value {
             font-family: var(--font-display);
-            font-size: 1.05rem; font-weight: 500;
-            color: var(--h-text);
+            font-size: 1.08rem;
+            font-weight: 500;
+            line-height: 1.35;
+            color: #fff;
         }
-        .home-details__value a {
-            color: var(--h-accent);
-            border-bottom: 1px solid transparent;
-            transition: border-color 0.3s;
+        .home-hero__meta-value--compact {
+            font-size: 1rem;
+            word-break: break-word;
         }
-        .home-details__value a:hover { border-bottom-color: var(--h-accent); }
+        .home-hero__meta-value a {
+            color: #fff;
+            border-bottom: 1px solid rgba(250, 246, 240, 0.55);
+            transition: border-color 0.3s, opacity 0.3s;
+        }
+        .home-hero__meta-value a:hover {
+            border-bottom-color: #fff;
+            opacity: 0.82;
+        }
 
         /* --- Research Interests --- */
         .home-research {
@@ -651,10 +656,9 @@
         @media (max-width: 1024px) {
             .home-hero { grid-template-columns: 1fr; gap: 3rem; padding: 3rem 2.5rem 2rem; }
             .home-hero__right { justify-content: flex-start; }
-            .home-hero__photo { width: 280px; height: 360px; }
+            .home-hero__avatar { width: 90px; }
+            .home-hero__meta { width: min(100%, 540px); }
             .home-hero__bg-shape { display: none; }
-            .home-details { margin: 0 2.5rem; flex-wrap: wrap; }
-            .home-details__item { min-width: 50%; }
             .home-research { padding: 4rem 2.5rem 5rem; }
             .home-research__grid { grid-template-columns: repeat(2, 1fr); }
             .pub-header, .pub-list { padding-left: 2.5rem; padding-right: 2.5rem; }
@@ -667,10 +671,9 @@
             .nav__links { gap: 1.4rem; }
             .nav__link { font-size: 0.7rem; letter-spacing: 0.12em; }
             .home-hero { padding: 2rem 1.5rem; min-height: auto; }
-            .home-hero__photo { width: 240px; height: 310px; }
-            .home-details { margin: 0 1.5rem; flex-direction: column; }
-            .home-details__item { border-right: none; border-bottom: 1px solid var(--h-line); }
-            .home-details__item:last-child { border-bottom: none; }
+            .home-hero__headline { gap: 0.95rem; }
+            .home-hero__avatar { width: 74px; }
+            .home-hero__meta { padding: 1.1rem; }
             .home-research { padding: 3rem 1.5rem 4rem; }
             .home-research__grid { grid-template-columns: 1fr; }
             .pub-header, .pub-list { padding-left: 1.5rem; padding-right: 1.5rem; }
@@ -704,58 +707,46 @@
 
                 <div class="home-hero__left">
                     <p class="home-hero__eyebrow reveal">Theoretical &amp; Computational Chemistry</p>
-                    <h1 class="home-hero__name reveal reveal-d1">
-                        Zirui <br><em>Sheng</em>
-                    </h1>
+                    <div class="home-hero__headline reveal reveal-d1">
+                        <div class="home-hero__avatar">
+                            <img src="photo.png" alt="Portrait of Zirui Sheng">
+                        </div>
+                        <h1 class="home-hero__name">
+                            Zirui <br><em>Sheng</em>
+                        </h1>
+                    </div>
                     <p class="home-hero__bio reveal reveal-d2">
                         <!-- === EDIT: Your bio paragraph === -->
-                        Ph.D. candidate in Physics at
-                        <a href="https://www.cuhk.edu.cn/en" target="_blank">The Chinese University of Hong Kong, Shenzhen</a>,
-                        School of Science and Engineering, supervised by
-                        <a href="https://shuaigroup.net" target="_blank">Prof. Zhigang Shuai</a>.
-                        I received my B.S. from Chongqing University, Hongshen Honors School
-                        (Mathematics and Physics Experimental Class).
+                        Ph.D. candidate in Physics,
+                        <a href="https://www.cuhk.edu.cn/en" target="_blank" rel="noreferrer">The Chinese University of Hong Kong, Shenzhen</a>,
+                        <a href="https://sse.cuhk.edu.cn/" target="_blank" rel="noreferrer">School of Science and Engineering</a>.
+                        <br>
+                        B.S. from Chongqing University, Hongshen Honors School, Mathematics and Physics Experimental Class.
                         <!-- === END EDIT === -->
                     </p>
                 </div>
 
                 <div class="home-hero__right reveal reveal-d3">
-                    <div class="home-hero__photo">
-                        <img src="photo.png" alt="Zirui Sheng">
-                        <div class="home-hero__photo-placeholder">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                                <rect x="3" y="3" width="18" height="18" rx="2"/>
-                                <circle cx="8.5" cy="8.5" r="1.5"/>
-                                <polyline points="21 15 16 10 5 21"/>
-                            </svg>
-                            Your Photo
+                    <div class="home-hero__meta">
+                        <div class="home-hero__meta-item">
+                            <div class="home-hero__meta-label">Office</div>
+                            <div class="home-hero__meta-value">CUHKSZ, Teaching C 412a</div>
                         </div>
-                        <div class="home-hero__photo-tag">Researcher</div>
+                        <div class="home-hero__meta-item">
+                            <div class="home-hero__meta-label">Advisor</div>
+                            <div class="home-hero__meta-value">
+                                <a href="https://shuaigroup.net" target="_blank" rel="noreferrer">Prof. Zhigang Shuai</a>
+                            </div>
+                        </div>
+                        <div class="home-hero__meta-item">
+                            <div class="home-hero__meta-label">Email</div>
+                            <div class="home-hero__meta-value home-hero__meta-value--compact">
+                                <a href="mailto:ziruisheng@link.cuhk.edu.cn">ziruisheng@link.cuhk.edu.cn</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
-
-            <!-- Details bar -->
-            <div class="home-details">
-                <!-- === EDIT: Update your details === -->
-                <div class="home-details__item reveal">
-                    <div class="home-details__label">Position</div>
-                    <div class="home-details__value">Ph.D. Candidate</div>
-                </div>
-                <div class="home-details__item reveal reveal-d1">
-                    <div class="home-details__label">Institution</div>
-                    <div class="home-details__value">CUHK-Shenzhen</div>
-                </div>
-                <div class="home-details__item reveal reveal-d2">
-                    <div class="home-details__label">Advisor</div>
-                    <div class="home-details__value"><a href="https://shuaigroup.net" target="_blank">Prof. Zhigang Shuai</a></div>
-                </div>
-                <div class="home-details__item reveal reveal-d3">
-                    <div class="home-details__label">Email</div>
-                    <div class="home-details__value">ziruisheng@link.cuhk.edu.cn</div>
-                </div>
-                <!-- === END EDIT === -->
-            </div>
 
             <!-- Research Interests -->
             <section class="home-research">
@@ -819,7 +810,7 @@
 
                     <article class="pub-item reveal">
                         <div class="pub-item__thumb">
-                            <img src="papers/chen2026_toc.png" alt="TOC graphic">
+                            <img src="papers/chen2026_toc.png">
                             <div class="pub-item__thumb-placeholder">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                                 TOC Image
@@ -843,7 +834,7 @@
 
                     <article class="pub-item reveal">
                         <div class="pub-item__thumb">
-                            <!-- === REPLACE: <img src="papers/sheng2025_toc.jpg" alt="TOC graphic"> === -->
+                            <img src="papers/sheng2025_toc.jpg">
                             <div class="pub-item__thumb-placeholder">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                                 TOC Image
@@ -863,7 +854,7 @@
 
                     <article class="pub-item reveal reveal-d1">
                         <div class="pub-item__thumb">
-                            <!-- === REPLACE: <img src="papers/yang2025_toc.png" alt="TOC graphic"> === -->
+                            <img src="papers/yang2025_toc.png">
                             <div class="pub-item__thumb-placeholder">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                                 TOC Image
@@ -883,7 +874,7 @@
 
                     <article class="pub-item reveal reveal-d2">
                         <div class="pub-item__thumb">
-                            <!-- === REPLACE: <img src="papers/jiang2025_toc.png" alt="TOC graphic"> === -->
+                            <img src="papers/jiang2025_toc.png">
                             <div class="pub-item__thumb-placeholder">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                                 TOC Image
@@ -907,7 +898,7 @@
 
                     <article class="pub-item reveal">
                         <div class="pub-item__thumb">
-                            <!-- === REPLACE: <img src="papers/sheng2024_toc.jpg" alt="TOC graphic"> === -->
+                            <img src="papers/sheng2024_toc.jpg">
                             <div class="pub-item__thumb-placeholder">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                                 TOC Image
@@ -966,7 +957,7 @@
                     <div class="contact-card reveal reveal-d4">
                         <div class="contact-card__label">Research Group</div>
                         <div class="contact-card__value">
-                            <a href="https://shuaigroup.net" target="_blank">Shuai Group</a>
+                            <a href="https://shuaigroup.net" target="_blank">Shuai Group</a><br>
                             <a href="https://weitangligroup.com/" target="_blank">Weitang Li's Group</a>
                         </div>
                     </div>
