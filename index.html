@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zirui Sheng — Quantum Physics Researcher</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════════
+           CSS VARIABLES
+           Three palettes inspired by LOEWE's use of
+           saturated pure color blocks
+           ═══════════════════════════════════════════ */
+        :root {
+            /* HOME palette — warm amber & olive earth */
+            --h-bg:          #FAF6F0;
+            --h-bg-alt:      #F0EBE1;
+            --h-accent:      #B8882B;
+            --h-accent-soft: #D4A84A;
+            --h-deep:        #3D4A2C;
+            --h-deep-2:      #2A3520;
+            --h-text:        #1E1E1C;
+            --h-text-sub:    #6B6455;
+            --h-line:        #C8BFA8;
+
+            /* PUBLICATIONS palette — slate blue & ivory */
+            --p-bg:          #EDF1F7;
+            --p-bg-alt:      #DFE5EF;
+            --p-accent:      #2E5A8E;
+            --p-accent-soft: #4A7DB8;
+            --p-deep:        #162A45;
+            --p-deep-2:      #0E1C30;
+            --p-text:        #1A1F2B;
+            --p-text-sub:    #5A6478;
+            --p-line:        #B0BDD0;
+
+            /* CONTACT palette — terracotta & charcoal */
+            --c-bg:          #F7F0EA;
+            --c-bg-alt:      #EDE2D6;
+            --c-accent:      #C4623A;
+            --c-accent-soft: #D8845E;
+            --c-deep:        #1C1816;
+            --c-deep-2:      #2C2420;
+            --c-text:        #1C1816;
+            --c-text-sub:    #7A6B5E;
+            --c-line:        #C4B5A4;
+
+            /* Typography */
+            --font-display: 'Cormorant Garamond', Georgia, serif;
+            --font-body:    'Outfit', -apple-system, sans-serif;
+        }
+
+        /* ═══════════════════════════════════════════
+           RESET & BASE
+           ═══════════════════════════════════════════ */
+        *, *::before, *::after {
+            margin: 0; padding: 0; box-sizing: border-box;
+        }
+        html {
+            font-size: 16px;
+            overflow-x: hidden;
+        }
+        body {
+            font-family: var(--font-body);
+            font-weight: 300;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            overflow: hidden;
+            height: 100vh;
+            background: var(--h-bg);
+            transition: background 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        body.page-publications { background: var(--p-bg); }
+        body.page-contact      { background: var(--c-bg); }
+
+        ::selection {
+            background: var(--h-accent);
+            color: #fff;
+        }
+
+        a { text-decoration: none; }
+
+        /* ═══════════════════════════════════════════
+           NAVIGATION
+           ═══════════════════════════════════════════ */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            z-index: 1000;
+            padding: 1.6rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(250, 246, 240, 0.85);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            transition: background 0.8s ease, border-color 0.8s ease;
+        }
+        body.page-publications .nav {
+            background: rgba(237, 241, 247, 0.88);
+        }
+        body.page-contact .nav {
+            background: rgba(247, 240, 234, 0.88);
+        }
+
+        .nav__logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            color: var(--h-text);
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: color 0.5s ease;
+        }
+        .nav__logo span { color: var(--h-accent); transition: color 0.5s ease; }
+        body.page-publications .nav__logo span { color: var(--p-accent); }
+        body.page-contact .nav__logo span      { color: var(--c-accent); }
+
+        .nav__links {
+            display: flex; gap: 2.2rem; list-style: none;
+        }
+        .nav__link {
+            font-size: 0.78rem;
+            font-weight: 400;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--h-text-sub);
+            cursor: pointer;
+            position: relative;
+            padding-bottom: 3px;
+            transition: color 0.4s ease;
+        }
+        .nav__link::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 1.5px;
+            background: var(--h-accent);
+            transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                        background 0.5s ease;
+        }
+        .nav__link:hover { color: var(--h-text); }
+        .nav__link:hover::after { width: 100%; }
+        .nav__link.active { color: var(--h-text); font-weight: 500; }
+        .nav__link.active::after { width: 100%; }
+
+        body.page-publications .nav__link { color: var(--p-text-sub); }
+        body.page-publications .nav__link:hover,
+        body.page-publications .nav__link.active { color: var(--p-text); }
+        body.page-publications .nav__link::after { background: var(--p-accent); }
+
+        body.page-contact .nav__link { color: var(--c-text-sub); }
+        body.page-contact .nav__link:hover,
+        body.page-contact .nav__link.active { color: var(--c-text); }
+        body.page-contact .nav__link::after { background: var(--c-accent); }
+
+        /* ═══════════════════════════════════════════
+           PAGE CONTAINER & TRANSITIONS
+           ═══════════════════════════════════════════ */
+        .page-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .page {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding-top: 72px; /* nav height */
+            opacity: 0;
+            transform: translateY(30px);
+            pointer-events: none;
+            transition:
+                opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .page.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .page.exit-up {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+
+        /* Scrollbar styling */
+        .page::-webkit-scrollbar { width: 4px; }
+        .page::-webkit-scrollbar-track { background: transparent; }
+        .page::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 4px; }
+
+        /* ═══════════════════════════════════════════
+           ■ HOME PAGE
+           ═══════════════════════════════════════════ */
+
+        /* --- Hero --- */
+        .home-hero {
+            min-height: calc(100vh - 72px);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            padding: 0 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .home-hero__bg-shape {
+            position: absolute;
+            top: -10%; right: -5%;
+            width: 55%;
+            height: 120%;
+            background: var(--h-deep-2);
+            clip-path: polygon(20% 0, 100% 0, 100% 100%, 5% 100%);
+            z-index: 0;
+        }
+        .home-hero__bg-shape::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 60% 40%, rgba(184,136,43,0.12) 0%, transparent 60%);
+        }
+
+        .home-hero__left {
+            position: relative; z-index: 2;
+        }
+
+        .home-hero__eyebrow {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--h-accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .home-hero__name {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 5.5vw, 5rem);
+            font-weight: 300;
+            line-height: 1.08;
+            color: var(--h-text);
+            margin-bottom: 1.5rem;
+        }
+        .home-hero__name em {
+            font-style: italic;
+            color: var(--h-deep);
+        }
+
+        .home-hero__bio {
+            font-size: 1rem;
+            line-height: 1.85;
+            color: var(--h-text-sub);
+            max-width: 480px;
+        }
+        .home-hero__bio a {
+            color: var(--h-accent);
+            border-bottom: 1px solid var(--h-accent);
+            transition: opacity 0.3s;
+        }
+        .home-hero__bio a:hover { opacity: 0.7; }
+
+        /* Photo on the right side */
+        .home-hero__right {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+        }
+
+        .home-hero__photo {
+            width: 340px;
+            height: 440px;
+            background: var(--h-bg-alt);
+            border: 1px solid var(--h-line);
+            position: relative;
+            overflow: hidden;
+        }
+        .home-hero__photo img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .home-hero__photo-placeholder {
+            position: absolute; inset: 0;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            color: var(--h-text-sub); font-size: 0.78rem;
+            letter-spacing: 0.1em; text-transform: uppercase;
+        }
+        .home-hero__photo-placeholder svg {
+            width: 40px; height: 40px; stroke: var(--h-line);
+            margin-bottom: 0.8rem;
+        }
+        .home-hero__photo-tag {
+            position: absolute;
+            bottom: 0; left: 0;
+            background: var(--h-accent);
+            color: #fff;
+            font-size: 0.65rem; font-weight: 500;
+            letter-spacing: 0.22em; text-transform: uppercase;
+            padding: 0.65rem 1.2rem;
+        }
+
+        /* --- Details bar --- */
+        .home-details {
+            display: flex;
+            border-top: 1px solid var(--h-line);
+            border-bottom: 1px solid var(--h-line);
+            margin: 0 4rem;
+        }
+        .home-details__item {
+            flex: 1;
+            padding: 1.6rem 2rem;
+            border-right: 1px solid var(--h-line);
+        }
+        .home-details__item:last-child { border-right: none; }
+        .home-details__label {
+            font-size: 0.65rem; font-weight: 500;
+            letter-spacing: 0.22em; text-transform: uppercase;
+            color: var(--h-text-sub);
+            margin-bottom: 0.3rem;
+        }
+        .home-details__value {
+            font-family: var(--font-display);
+            font-size: 1.05rem; font-weight: 500;
+            color: var(--h-text);
+        }
+        .home-details__value a {
+            color: var(--h-accent);
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+        .home-details__value a:hover { border-bottom-color: var(--h-accent); }
+
+        /* --- Research Interests --- */
+        .home-research {
+            padding: 5rem 4rem 6rem;
+        }
+        .home-research__label {
+            font-size: 0.72rem; font-weight: 500;
+            letter-spacing: 0.25em; text-transform: uppercase;
+            color: var(--h-accent);
+            margin-bottom: 0.8rem;
+        }
+        .home-research__heading {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            font-weight: 400; color: var(--h-text);
+            margin-bottom: 3rem;
+        }
+        .home-research__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+        }
+        .home-research__card {
+            background: var(--h-deep-2);
+            color: var(--h-bg);
+            padding: 2.5rem 2rem;
+            position: relative; overflow: hidden;
+            transition: background 0.5s ease;
+        }
+        .home-research__card::before {
+            content: '';
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: var(--h-accent);
+            transform: scaleX(0); transform-origin: left;
+            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .home-research__card:hover { background: var(--h-deep); }
+        .home-research__card:hover::before { transform: scaleX(1); }
+        .home-research__card-num {
+            font-family: var(--font-display);
+            font-size: 2.6rem; font-weight: 300;
+            color: rgba(184,136,43,0.3);
+            margin-bottom: 0.8rem; line-height: 1;
+        }
+        .home-research__card-title {
+            font-family: var(--font-display);
+            font-size: 1.3rem; font-weight: 500;
+            margin-bottom: 0.7rem;
+        }
+        .home-research__card-desc {
+            font-size: 0.85rem; line-height: 1.7;
+            color: rgba(250,246,240,0.55);
+        }
+
+        /* --- Home footer stripe --- */
+        .home-footer {
+            display: flex; height: 5px;
+        }
+        .home-footer span { flex: 1; }
+        .home-footer span:nth-child(1) { background: var(--h-accent); }
+        .home-footer span:nth-child(2) { background: var(--h-deep); }
+        .home-footer span:nth-child(3) { background: #C4623A; }
+        .home-footer span:nth-child(4) { background: var(--h-deep-2); }
+        .home-footer span:nth-child(5) { background: var(--h-accent-soft); }
+
+        /* ═══════════════════════════════════════════
+           ■ PUBLICATIONS PAGE
+           ═══════════════════════════════════════════ */
+        #page-publications {
+            background: var(--p-bg);
+        }
+
+        .pub-header {
+            padding: 5rem 4rem 0;
+            max-width: 1300px; margin: 0 auto;
+            display: flex; justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 1.5px solid var(--p-deep);
+            padding-bottom: 2rem;
+            margin-bottom: 1rem;
+        }
+        .pub-header__label {
+            font-size: 0.72rem; font-weight: 500;
+            letter-spacing: 0.25em; text-transform: uppercase;
+            color: var(--p-accent); margin-bottom: 0.5rem;
+        }
+        .pub-header__title {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 4vw, 3.2rem);
+            font-weight: 400; color: var(--p-text);
+        }
+        .pub-header__count {
+            font-family: var(--font-display);
+            font-size: 3rem; font-weight: 300;
+            color: var(--p-line);
+        }
+
+        .pub-list {
+            max-width: 1300px; margin: 0 auto;
+            padding: 0 4rem 5rem;
+        }
+
+        .pub-year-group {
+            margin-bottom: 2rem;
+        }
+        .pub-year-label {
+            font-family: var(--font-display);
+            font-size: 1.6rem; font-weight: 600;
+            color: var(--p-accent);
+            padding: 1.5rem 0 0.8rem;
+            border-bottom: 1px solid var(--p-line);
+            margin-bottom: 0;
+        }
+
+        .pub-item {
+            display: grid;
+            grid-template-columns: 160px 1fr auto;
+            gap: 1.8rem;
+            padding: 1.8rem 0;
+            border-bottom: 1px solid rgba(176,189,208,0.35);
+            transition: all 0.35s ease;
+            align-items: start;
+        }
+        .pub-item:hover {
+            padding-left: 1rem;
+            border-bottom-color: var(--p-accent);
+        }
+        .pub-item__thumb {
+            width: 160px;
+            height: 110px;
+            background: var(--p-bg-alt);
+            border: 1px solid var(--p-line);
+            overflow: hidden;
+            position: relative;
+            flex-shrink: 0;
+        }
+        .pub-item__thumb img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .pub-item__thumb-placeholder {
+            position: absolute; inset: 0;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            color: var(--p-line);
+            font-size: 0.6rem; font-weight: 500;
+            letter-spacing: 0.12em; text-transform: uppercase;
+        }
+        .pub-item__thumb-placeholder svg {
+            width: 28px; height: 28px;
+            stroke: var(--p-line); margin-bottom: 0.4rem;
+        }
+        .pub-item__title {
+            font-family: var(--font-display);
+            font-size: 1.18rem; font-weight: 600;
+            color: var(--p-text); line-height: 1.4;
+            margin-bottom: 0.4rem;
+        }
+        .pub-item__authors {
+            font-size: 0.86rem; color: var(--p-text-sub);
+            line-height: 1.6; margin-bottom: 0.3rem;
+        }
+        .pub-item__authors strong {
+            color: var(--p-text); font-weight: 500;
+        }
+        .pub-item__journal {
+            font-size: 0.8rem; font-style: italic;
+            color: var(--p-accent); font-weight: 400;
+        }
+        .pub-item__links {
+            display: flex; gap: 0.6rem;
+            align-items: flex-start; padding-top: 0.2rem;
+        }
+        .pub-item__link {
+            font-size: 0.68rem; font-weight: 500;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--p-text-sub);
+            border: 1px solid var(--p-line);
+            padding: 0.35rem 0.8rem;
+            transition: all 0.3s ease;
+        }
+        .pub-item__link:hover {
+            border-color: var(--p-accent); color: var(--p-accent);
+        }
+
+        /* Bottom decorative band */
+        .pub-footer {
+            display: flex; height: 5px;
+        }
+        .pub-footer span { flex: 1; }
+        .pub-footer span:nth-child(1) { background: var(--p-accent); }
+        .pub-footer span:nth-child(2) { background: var(--p-deep); }
+        .pub-footer span:nth-child(3) { background: #4A7DB8; }
+        .pub-footer span:nth-child(4) { background: var(--p-deep-2); }
+        .pub-footer span:nth-child(5) { background: var(--p-accent-soft); }
+
+        /* ═══════════════════════════════════════════
+           ■ CONTACT PAGE
+           ═══════════════════════════════════════════ */
+        #page-contact {
+            background: var(--c-bg);
+        }
+
+        .contact-wrapper {
+            min-height: calc(100vh - 72px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 4rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .contact-label {
+            font-size: 0.72rem; font-weight: 500;
+            letter-spacing: 0.25em; text-transform: uppercase;
+            color: var(--c-accent); margin-bottom: 1rem;
+        }
+
+        .contact-heading {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300; font-style: italic;
+            color: var(--c-text);
+            margin-bottom: 1.5rem;
+            line-height: 1.15;
+        }
+
+        .contact-desc {
+            font-size: 1rem; color: var(--c-text-sub);
+            max-width: 520px; line-height: 1.85;
+            margin-bottom: 3.5rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2px;
+            max-width: 700px;
+        }
+
+        .contact-card {
+            background: var(--c-deep);
+            padding: 2.2rem 2rem;
+            transition: background 0.4s ease;
+            position: relative; overflow: hidden;
+        }
+        .contact-card::before {
+            content: '';
+            position: absolute; bottom: 0; left: 0;
+            width: 100%; height: 3px;
+            background: var(--c-accent);
+            transform: scaleX(0); transform-origin: left;
+            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .contact-card:hover { background: var(--c-deep-2); }
+        .contact-card:hover::before { transform: scaleX(1); }
+        .contact-card__label {
+            font-size: 0.65rem; font-weight: 500;
+            letter-spacing: 0.22em; text-transform: uppercase;
+            color: var(--c-accent-soft);
+            margin-bottom: 0.6rem;
+        }
+        .contact-card__value {
+            font-family: var(--font-display);
+            font-size: 1.15rem; font-weight: 500;
+            color: var(--c-bg);
+        }
+        .contact-card__value a {
+            color: var(--c-bg);
+            border-bottom: 1px solid rgba(247,240,234,0.3);
+            transition: border-color 0.3s;
+        }
+        .contact-card__value a:hover {
+            border-bottom-color: var(--c-accent-soft);
+        }
+
+        .contact-bottom {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--c-line);
+            font-size: 0.78rem;
+            color: var(--c-text-sub);
+            letter-spacing: 0.06em;
+        }
+        .contact-bottom a {
+            color: var(--c-accent);
+        }
+
+        /* ═══════════════════════════════════════════
+           SCROLL REVEAL (within pages)
+           ═══════════════════════════════════════════ */
+        .reveal {
+            opacity: 0; transform: translateY(35px);
+            transition: all 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-d1 { transition-delay: 0.08s; }
+        .reveal-d2 { transition-delay: 0.16s; }
+        .reveal-d3 { transition-delay: 0.24s; }
+        .reveal-d4 { transition-delay: 0.32s; }
+
+        /* ═══════════════════════════════════════════
+           RESPONSIVE
+           ═══════════════════════════════════════════ */
+        @media (max-width: 1024px) {
+            .home-hero { grid-template-columns: 1fr; gap: 3rem; padding: 3rem 2.5rem 2rem; }
+            .home-hero__right { justify-content: flex-start; }
+            .home-hero__photo { width: 280px; height: 360px; }
+            .home-hero__bg-shape { display: none; }
+            .home-details { margin: 0 2.5rem; flex-wrap: wrap; }
+            .home-details__item { min-width: 50%; }
+            .home-research { padding: 4rem 2.5rem 5rem; }
+            .home-research__grid { grid-template-columns: repeat(2, 1fr); }
+            .pub-header, .pub-list { padding-left: 2.5rem; padding-right: 2.5rem; }
+            .contact-wrapper { padding: 3rem 2.5rem; }
+        }
+
+        @media (max-width: 768px) {
+            .nav { padding: 1.2rem 1.5rem; }
+            .nav__logo { font-size: 1.25rem; }
+            .nav__links { gap: 1.4rem; }
+            .nav__link { font-size: 0.7rem; letter-spacing: 0.12em; }
+            .home-hero { padding: 2rem 1.5rem; min-height: auto; }
+            .home-hero__photo { width: 240px; height: 310px; }
+            .home-details { margin: 0 1.5rem; flex-direction: column; }
+            .home-details__item { border-right: none; border-bottom: 1px solid var(--h-line); }
+            .home-details__item:last-child { border-bottom: none; }
+            .home-research { padding: 3rem 1.5rem 4rem; }
+            .home-research__grid { grid-template-columns: 1fr; }
+            .pub-header, .pub-list { padding-left: 1.5rem; padding-right: 1.5rem; }
+            .pub-item { grid-template-columns: 1fr; gap: 0.8rem; }
+            .pub-item__thumb { width: 100%; height: 140px; }
+            .contact-wrapper { padding: 2rem 1.5rem; }
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══════════ NAVIGATION ═══════════ -->
+    <nav class="nav">
+        <div class="nav__logo" data-page="home">Z<span>.</span> Sheng</div>
+        <ul class="nav__links">
+            <li><span class="nav__link active" data-page="home">Home</span></li>
+            <li><span class="nav__link" data-page="publications">Publications</span></li>
+            <li><span class="nav__link" data-page="contact">Contact</span></li>
+        </ul>
+    </nav>
+
+    <!-- ═══════════ PAGE CONTAINER ═══════════ -->
+    <div class="page-container">
+
+        <!-- ■■■ HOME ■■■ -->
+        <div class="page active" id="page-home">
+
+            <section class="home-hero">
+                <div class="home-hero__bg-shape"></div>
+
+                <div class="home-hero__left">
+                    <p class="home-hero__eyebrow reveal">Theoretical &amp; Computational Chemistry</p>
+                    <h1 class="home-hero__name reveal reveal-d1">
+                        Zirui <br><em>Sheng</em>
+                    </h1>
+                    <p class="home-hero__bio reveal reveal-d2">
+                        <!-- === EDIT: Your bio paragraph === -->
+                        Ph.D. candidate in Physics at
+                        <a href="https://www.cuhk.edu.cn/en" target="_blank">The Chinese University of Hong Kong, Shenzhen</a>,
+                        School of Science and Engineering, supervised by
+                        <a href="https://shuaigroup.net" target="_blank">Prof. Zhigang Shuai</a>.
+                        I received my B.S. from Chongqing University, Hongshen Honors School
+                        (Mathematics and Physics Experimental Class).
+                        <!-- === END EDIT === -->
+                    </p>
+                </div>
+
+                <div class="home-hero__right reveal reveal-d3">
+                    <div class="home-hero__photo">
+                        <img src="photo.png" alt="Zirui Sheng">
+                        <div class="home-hero__photo-placeholder">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                <circle cx="8.5" cy="8.5" r="1.5"/>
+                                <polyline points="21 15 16 10 5 21"/>
+                            </svg>
+                            Your Photo
+                        </div>
+                        <div class="home-hero__photo-tag">Researcher</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Details bar -->
+            <div class="home-details">
+                <!-- === EDIT: Update your details === -->
+                <div class="home-details__item reveal">
+                    <div class="home-details__label">Position</div>
+                    <div class="home-details__value">Ph.D. Candidate</div>
+                </div>
+                <div class="home-details__item reveal reveal-d1">
+                    <div class="home-details__label">Institution</div>
+                    <div class="home-details__value">CUHK-Shenzhen</div>
+                </div>
+                <div class="home-details__item reveal reveal-d2">
+                    <div class="home-details__label">Advisor</div>
+                    <div class="home-details__value"><a href="https://shuaigroup.net" target="_blank">Prof. Zhigang Shuai</a></div>
+                </div>
+                <div class="home-details__item reveal reveal-d3">
+                    <div class="home-details__label">Email</div>
+                    <div class="home-details__value">ziruisheng@link.cuhk.edu.cn</div>
+                </div>
+                <!-- === END EDIT === -->
+            </div>
+
+            <!-- Research Interests -->
+            <section class="home-research">
+                <p class="home-research__label reveal">Research Interests</p>
+                <h2 class="home-research__heading reveal reveal-d1">Areas of Focus</h2>
+
+                <div class="home-research__grid">
+                    <!-- === EDIT: Update research areas === -->
+                    <div class="home-research__card reveal">
+                        <div class="home-research__card-num">01</div>
+                        <h3 class="home-research__card-title">Tensor Networks &amp; Quantum Algorithms</h3>
+                        <p class="home-research__card-desc">
+                            Development and application of tensor network methods and quantum
+                            computing algorithms for many-body quantum systems.
+                        </p>
+                    </div>
+                    <div class="home-research__card reveal reveal-d2">
+                        <div class="home-research__card-num">02</div>
+                        <h3 class="home-research__card-title">Open Quantum System Dynamics</h3>
+                        <p class="home-research__card-desc">
+                            Investigating transport processes under quantum many-body interactions,
+                            with emphasis on charge and energy transfer in complex molecular systems.
+                        </p>
+                    </div>
+                    <div class="home-research__card reveal reveal-d2">
+                        <div class="home-research__card-num">03</div>
+                        <h3 class="home-research__card-title">2D Materials First-Principles Calculations</h3>
+                        <p class="home-research__card-desc">
+                            First-principles calculations of two-dimensional materials,
+                            exploring their electronic, optical, and transport properties.
+                        </p>
+                    </div>
+                    <!-- === END EDIT === -->
+                </div>
+            </section>
+
+            <div class="home-footer">
+                <span></span><span></span><span></span><span></span><span></span>
+            </div>
+        </div>
+
+        <!-- ■■■ PUBLICATIONS ■■■ -->
+        <div class="page" id="page-publications">
+
+            <div class="pub-header">
+                <div>
+                    <p class="pub-header__label reveal">Selected Works</p>
+                    <h2 class="pub-header__title reveal reveal-d1">Publications</h2>
+                </div>
+                <div class="pub-header__count reveal" id="pub-count"></div>
+            </div>
+
+            <div class="pub-list" id="pub-list">
+                <!-- === EDIT: Your publications ===
+                     Group papers by year. Copy a pub-year-group + pub-item block
+                     for each year/paper. Bold your name with <strong>.
+                === -->
+
+                <div class="pub-year-group">
+                    <div class="pub-year-label reveal">2026</div>
+
+                    <article class="pub-item reveal">
+                        <div class="pub-item__thumb">
+                            <img src="papers/chen2026_toc.png" alt="TOC graphic">
+                            <div class="pub-item__thumb-placeholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                                TOC Image
+                            </div>
+                        </div>
+                        <div class="pub-item__content">
+                            <h3 class="pub-item__title">Quantum-Classical Hybrid Computation of Electron Transfer in a Cryptochrome Protein via VQE-PDFT and Multiscale Modeling</h3>
+                            <p class="pub-item__authors">Yibo Chen, <strong>Zirui Sheng</strong>, Weitang Li, Yong Zhang, Xun Xu, Jun-Han Huang, Yuxiang Li</p>
+                            <p class="pub-item__journal">Chemical Science, 2026</p>
+                        </div>
+                        <div class="pub-item__links">
+                            <!-- === EDIT: Update href to the journal URL and your PDF file === -->
+                            <a href="https://doi.org/10.1039/D5SC07528A" class="pub-item__link" target="_blank">Link</a>
+                            <a href="papers/chen2026_vqepdft.pdf" class="pub-item__link" target="_blank">PDF</a>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="pub-year-group">
+                    <div class="pub-year-label reveal">2025</div>
+
+                    <article class="pub-item reveal">
+                        <div class="pub-item__thumb">
+                            <!-- === REPLACE: <img src="papers/sheng2025_toc.jpg" alt="TOC graphic"> === -->
+                            <div class="pub-item__thumb-placeholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                                TOC Image
+                            </div>
+                        </div>
+                        <div class="pub-item__content">
+                            <h3 class="pub-item__title">Quantum Computer Simulation of Molecules in Optical Cavity</h3>
+                            <p class="pub-item__authors"><strong>Zirui Sheng</strong>, Yufei Ge, Jianpeng Chen, Weitang Li, Zhigang Shuai</p>
+                            <p class="pub-item__journal">Precision Chemistry, 3(6), 326–336, 2025</p>
+                        </div>
+                        <div class="pub-item__links">
+                            <!-- === EDIT: Update href === -->
+                            <a href="https://doi.org/10.1021/prechem.4c00108" class="pub-item__link" target="_blank">Link</a>
+                            <a href="papers/sheng2025_cavity.pdf" class="pub-item__link" target="_blank">PDF</a>
+                        </div>
+                    </article>
+
+                    <article class="pub-item reveal reveal-d1">
+                        <div class="pub-item__thumb">
+                            <!-- === REPLACE: <img src="papers/yang2025_toc.png" alt="TOC graphic"> === -->
+                            <div class="pub-item__thumb-placeholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                                TOC Image
+                            </div>
+                        </div>
+                        <div class="pub-item__content">
+                            <h3 class="pub-item__title">Hierarchical Equations of Motion in Matrix Product States: Formalism and Applications for Charge Transport</h3>
+                            <p class="pub-item__authors">Hengrui Yang, <strong>Zirui Sheng</strong>, Liqi Zhou, Zhigang Shuai</p>
+                            <p class="pub-item__journal">Journal of Chemical Theory and Computation, 21(20), 10108–10119, 2025</p>
+                        </div>
+                        <div class="pub-item__links">
+                            <!-- === EDIT: Update href === -->
+                            <a href="https://doi.org/10.1021/acs.jctc.5c01385" class="pub-item__link" target="_blank">Link</a>
+                            <a href="papers/yang2025_heom.pdf" class="pub-item__link" target="_blank">PDF</a>
+                        </div>
+                    </article>
+
+                    <article class="pub-item reveal reveal-d2">
+                        <div class="pub-item__thumb">
+                            <!-- === REPLACE: <img src="papers/jiang2025_toc.png" alt="TOC graphic"> === -->
+                            <div class="pub-item__thumb-placeholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                                TOC Image
+                            </div>
+                        </div>
+                        <div class="pub-item__content">
+                            <h3 class="pub-item__title">Measurement-Efficient ADAPT-VQE with the SOAP Parameter Optimizer</h3>
+                            <p class="pub-item__authors">Xinyan Jiang, <strong>Zirui Sheng</strong>, Cunxi Gong, Weitang Li, Zhigang Shuai</p>
+                            <p class="pub-item__journal">The Journal of Chemical Physics, 163(22), 2025</p>
+                        </div>
+                        <div class="pub-item__links">
+                            <!-- === EDIT: Update href === -->
+                            <a href="https://doi.org/10.1063/5.0212345" class="pub-item__link" target="_blank">Link</a>
+                            <a href="papers/jiang2025_adaptvqe.pdf" class="pub-item__link" target="_blank">PDF</a>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="pub-year-group">
+                    <div class="pub-year-label reveal">2024</div>
+
+                    <article class="pub-item reveal">
+                        <div class="pub-item__thumb">
+                            <!-- === REPLACE: <img src="papers/sheng2024_toc.jpg" alt="TOC graphic"> === -->
+                            <div class="pub-item__thumb-placeholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                                TOC Image
+                            </div>
+                        </div>
+                        <div class="pub-item__content">
+                            <h3 class="pub-item__title">TD-DMRG Study of Exciton Dynamics with Both Thermal and Static Disorders for Fenna-Matthews-Olson Complex</h3>
+                            <p class="pub-item__authors"><strong>Zirui Sheng</strong>, Tong Jiang, Weitang Li, Zhigang Shuai</p>
+                            <p class="pub-item__journal">Journal of Chemical Theory and Computation, 20(15), 6470–6484, 2024</p>
+                        </div>
+                        <div class="pub-item__links">
+                            <!-- === EDIT: Update href === -->
+                            <a href="https://doi.org/10.1021/acs.jctc.4c00493" class="pub-item__link" target="_blank">Link</a>
+                            <a href="papers/sheng2024_tddmrg.pdf" class="pub-item__link" target="_blank">PDF</a>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- === END EDIT === -->
+            </div>
+
+            <div class="pub-footer">
+                <span></span><span></span><span></span><span></span><span></span>
+            </div>
+        </div>
+
+        <!-- ■■■ CONTACT ■■■ -->
+        <div class="page" id="page-contact">
+            <div class="contact-wrapper">
+                <p class="contact-label reveal">Get in Touch</p>
+                <h2 class="contact-heading reveal reveal-d1">Let's<br>Collaborate</h2>
+                <p class="contact-desc reveal reveal-d2">
+                    I am always open to discussions on potential collaborations. Feel free to reach out through any of the channels below.
+                </p>
+
+                <div class="contact-grid">
+                    <!-- === EDIT: Update your contact info === -->
+                    <div class="contact-card reveal reveal-d2">
+                        <div class="contact-card__label">Email</div>
+                        <div class="contact-card__value">
+                            <a href="mailto:ziruisheng@link.cuhk.edu.cn">ziruisheng@link.cuhk.edu.cn</a>
+                        </div>
+                    </div>
+                    <div class="contact-card reveal reveal-d3">
+                        <div class="contact-card__label">Google Scholar</div>
+                        <div class="contact-card__value">
+                            <a href="https://scholar.google.com/citations?hl=zh-CN&user=iD0TgGEAAAAJ" target="_blank">Scholar Profile</a>
+                        </div>
+                    </div>
+                    <div class="contact-card reveal reveal-d3">
+                        <div class="contact-card__label">GitHub</div>
+                        <div class="contact-card__value">
+                            <a href="https://github.com/ziruisheng" target="_blank">GitHub Profile</a>
+                        </div>
+                    </div>
+                    <div class="contact-card reveal reveal-d4">
+                        <div class="contact-card__label">Research Group</div>
+                        <div class="contact-card__value">
+                            <a href="https://shuaigroup.net" target="_blank">Shuai Group</a>
+                            <a href="https://weitangligroup.com/" target="_blank">Weitang Li's Group</a>
+                        </div>
+                    </div>
+                    <!-- === END EDIT === -->
+                </div>
+
+                <div class="contact-bottom reveal reveal-d4">
+                    &copy; 2026 Zirui Sheng &middot; <a href="https://www.zrsheng.com">www.zrsheng.com</a>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /page-container -->
+
+    <!-- ═══════════ JAVASCRIPT ═══════════ -->
+    <script>
+        // --- Page switching with smooth transitions ---
+        const pages = document.querySelectorAll('.page');
+        const navLinks = document.querySelectorAll('.nav__link');
+        const navLogo = document.querySelector('.nav__logo');
+        const body = document.body;
+        let currentPage = 'home';
+        let isTransitioning = false;
+
+        function switchPage(targetId) {
+            if (targetId === currentPage || isTransitioning) return;
+            isTransitioning = true;
+
+            const currentEl = document.getElementById('page-' + currentPage);
+            const targetEl = document.getElementById('page-' + targetId);
+
+            // Reset scroll on target page
+            targetEl.scrollTop = 0;
+
+            // Remove visible class from reveals in target (so they re-animate)
+            targetEl.querySelectorAll('.reveal.visible').forEach(el => {
+                el.classList.remove('visible');
+            });
+
+            // Exit current page
+            currentEl.classList.remove('active');
+            currentEl.classList.add('exit-up');
+
+            // Update body class for nav color theming
+            body.className = 'page-' + targetId;
+
+            // Enter new page after brief delay
+            setTimeout(() => {
+                currentEl.classList.remove('exit-up');
+                targetEl.classList.add('active');
+                currentPage = targetId;
+
+                // Trigger reveals on the new page
+                setTimeout(() => {
+                    triggerReveals(targetEl);
+                    isTransitioning = false;
+                }, 100);
+            }, 350);
+
+            // Update nav active state
+            navLinks.forEach(l => l.classList.remove('active'));
+            document.querySelector('[data-page="' + targetId + '"]').classList.add('active');
+        }
+
+        // Nav click handlers
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => switchPage(link.dataset.page));
+        });
+        navLogo.addEventListener('click', () => switchPage('home'));
+
+        // --- Scroll reveal within pages ---
+        function triggerReveals(container) {
+            const els = container.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+            els.forEach(el => observer.observe(el));
+        }
+
+        // Initial reveals for home page
+        triggerReveals(document.getElementById('page-home'));
+
+        // Publication count
+        const pubCount = document.querySelectorAll('.pub-item').length;
+        const countEl = document.getElementById('pub-count');
+        if (countEl) countEl.textContent = String(pubCount).padStart(2, '0');
+    </script>
+</body>
+</html>
